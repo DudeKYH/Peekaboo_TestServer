@@ -42,7 +42,7 @@ class GameServer extends TcpServer {
     const register = new client.Registry();
 
     // 서비스 설정
-    const serviceName = 'account'; // 현재 서비스 이름
+    const serviceName = 'game'; // 현재 서비스 이름
     const PORT = Number(config.game.port) + 2000; // Prometheus HTTP 포트
 
     // 디폴트 레이블 등록
@@ -77,7 +77,7 @@ class GameServer extends TcpServer {
 
     // /metrics 엔드포인트
     app.get('/metrics', async (req, res) => {
-      console.log(`[Account] Metric Request`);
+      console.log(`[Game] Metric Request`);
       res.setHeader('Content-Type', register.contentType);
       res.end(await register.metrics());
     });
@@ -85,7 +85,7 @@ class GameServer extends TcpServer {
     // HTTP 서버 실행
     app.listen(PORT, () => {
       console.log(
-        `[Account] prometheus metrics server for ${serviceName} running on port ${PORT}`,
+        `[Game] prometheus metrics server for ${serviceName} running on port ${PORT}`,
       );
     });
   }

@@ -56,7 +56,7 @@ class SessionServer extends TcpServer {
     const register = new client.Registry();
 
     // 서비스 설정
-    const serviceName = 'account'; // 현재 서비스 이름
+    const serviceName = 'session'; // 현재 서비스 이름
     const PORT = Number(config.session.port) + 2000; // Prometheus HTTP 포트
 
     // 디폴트 레이블 등록
@@ -91,7 +91,7 @@ class SessionServer extends TcpServer {
 
     // /metrics 엔드포인트
     app.get('/metrics', async (req, res) => {
-      console.log(`[Account] Metric Request`);
+      console.log(`[Session] Metric Request`);
       res.setHeader('Content-Type', register.contentType);
       res.end(await register.metrics());
     });
@@ -99,7 +99,7 @@ class SessionServer extends TcpServer {
     // HTTP 서버 실행
     app.listen(PORT, () => {
       console.log(
-        `[Account] prometheus metrics server for ${serviceName} running on port ${PORT}`,
+        `[Session] prometheus metrics server for ${serviceName} running on port ${PORT}`,
       );
     });
   }
