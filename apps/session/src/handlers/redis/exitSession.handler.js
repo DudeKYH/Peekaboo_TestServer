@@ -10,6 +10,6 @@ export const exitSessionHandler = async (serverInstance, data) => {
     }
     delete serverInstance.userSessions[data.clientKey];
   } catch (e) {
-    handleError(e, server);
+    handleError(e, serverInstance);
   }
 };

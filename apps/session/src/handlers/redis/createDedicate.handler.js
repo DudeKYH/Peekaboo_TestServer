@@ -21,6 +21,6 @@ export const createDedicatedHandler = async (serverInstance, data) => {
       serverInstance.gameSessions[gameSessionId],
     );
   } catch (e) {
-    handleError(e, server);
+    handleError(e, serverInstance);
   }
 };
