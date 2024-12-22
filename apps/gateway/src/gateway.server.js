@@ -170,7 +170,7 @@ class GatewayServer extends TcpServer {
         clientCounterGauge.set(Object.keys(connectClients).length || 0); // 현재 클라이언트 수
       },
     });
-    register.registerMetric(memoryUsageGauge);
+    register.registerMetric(clientCounterGauge);
 
     // 총 네트워크 트래픽 메트릭
     this.networkInCounter = new client.Counter({
