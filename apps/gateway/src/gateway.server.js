@@ -162,6 +162,16 @@ class GatewayServer extends TcpServer {
     });
     register.registerMetric(memoryUsageGauge);
 
+    // 접속한 유저 수 계산
+    const clientCounterGauge = new client.Gauge({
+      name: 'gateway_connected_clients',
+      help: 'Number of currently connected clients to the Gateway',
+      collect() {
+        clientCounterGauge.set(Object.keys(connectClients).length || 0); // 현재 클라이언트 수
+      },
+    });
+    register.registerMetric(memoryUsageGauge);
+
     // 총 네트워크 트래픽 메트릭
     this.networkInCounter = new client.Counter({
       name: 'server_network_in_bytes',
