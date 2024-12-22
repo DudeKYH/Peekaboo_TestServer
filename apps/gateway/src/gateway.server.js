@@ -167,7 +167,7 @@ class GatewayServer extends TcpServer {
       name: 'gateway_connected_clients',
       help: 'Number of currently connected clients to the Gateway',
       collect() {
-        clientCounterGauge.set(Object.keys(connectClients).length || 0); // 현재 클라이언트 수
+        clientCounterGauge.set(Object.keys(this.connectClients).length || 0); // 현재 클라이언트 수
       },
     });
     register.registerMetric(clientCounterGauge);
