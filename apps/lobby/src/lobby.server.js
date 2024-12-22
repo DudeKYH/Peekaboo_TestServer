@@ -70,6 +70,13 @@ class LobbyServer extends TcpServer {
     });
     register.registerMetric(memoryUsageGauge);
 
+    this.serverErrorCounter = new client.Counter({
+      name: 'gateway_server_errors_total',
+      help: 'Total number of errors occurred in the Gateway server',
+      labelNames: ['type', 'message'], // 라벨에 에러 유형 및 요약 메시지 포함
+    });
+    register.registerMetric(this.serverErrorCounter);
+
     // /metrics 엔드포인트
     app.get('/metrics', async (req, res) => {
       console.log(`[Lobby] Metric Request`);
