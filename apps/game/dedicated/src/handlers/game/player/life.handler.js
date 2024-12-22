@@ -22,6 +22,6 @@ export const lifeUpdateHandler = (socket, clientKey, payload, server) => {
 
     lifeResponse(socket, clientKey, lifePayload);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

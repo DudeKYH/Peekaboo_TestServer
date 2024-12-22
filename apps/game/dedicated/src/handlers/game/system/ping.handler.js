@@ -14,6 +14,6 @@ export const pingHandler = (socket, clientKey, payload, server) => {
 
     user.receivePing(payload);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

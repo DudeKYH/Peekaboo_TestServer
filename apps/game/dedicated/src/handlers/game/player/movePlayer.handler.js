@@ -32,6 +32,6 @@ export const movePlayerRequestHandler = (
     //시간 저장
     user.character.lastUpdateTime = Date.now();
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

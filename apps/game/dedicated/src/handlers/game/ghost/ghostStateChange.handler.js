@@ -24,6 +24,6 @@ export const ghostStateChangeRequestHandler = (
     console.log('ghostState--------', characterState);
     ghostStateChangeNotification(server.game, ghostId, characterState);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

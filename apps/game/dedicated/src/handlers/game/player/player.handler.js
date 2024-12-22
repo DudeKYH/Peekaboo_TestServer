@@ -54,7 +54,7 @@ export const playerStateChangeRequestHandler = async (
       }
     }
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };
 
@@ -125,6 +125,6 @@ export const playerAttackedRequestHandler = async (
       }
     }
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

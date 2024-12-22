@@ -43,6 +43,6 @@ export const joinSessionHandler = async (serverInstance, data) => {
       responseChannel,
       JSON.stringify(resMessage),
     );
-    handleError(e);
+    handleError(e, server);
   }
 };

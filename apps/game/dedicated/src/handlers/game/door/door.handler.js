@@ -23,6 +23,6 @@ export const doorToggleRequestHandler = async (
       { jobId: `door:${doorId}`, removeOnComplete: true },
     );
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

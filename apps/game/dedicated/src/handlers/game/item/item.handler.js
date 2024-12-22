@@ -38,7 +38,7 @@ export const itemGetRequestHandler = async (
       { jobId: `getItem:${itemId}`, removeOnComplete: true },
     );
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };
 
@@ -63,7 +63,7 @@ export const itemChangeRequestHandler = async (
     // 손에 들어주기
     itemChangeNotification(server.game, user.id, itemId);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };
 
@@ -107,7 +107,7 @@ export const itemUseRequestHandler = async (
 
     itemUseNotification(server.game, user.id, itemId);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };
 
@@ -135,7 +135,7 @@ export const itemDisuseRequestHandler = async (
 
     itemDisuseNotification(server.game, user.id, itemId);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };
 
@@ -177,6 +177,6 @@ export const itemDiscardRequestHandler = async (
 
     itemDiscardNotification(server.game, user.id, itemId);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

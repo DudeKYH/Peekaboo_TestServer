@@ -172,6 +172,16 @@ class GatewayServer extends TcpServer {
     });
     register.registerMetric(clientCounterGauge);
 
+    // 생성된 Dedicated Server 수 계산
+    const DedicatedCounterGauge = new client.Gauge({
+      name: 'gateway_connected_clients',
+      help: 'Number of currently connected clients to the Gateway',
+      collect: () => {
+        clientCounterGauge.set(Object.keys(this.connectClients).length || 0); // 현재 클라이언트 수
+      },
+    });
+    register.registerMetric(clientCounterGauge);
+
     // 총 네트워크 트래픽 메트릭
     this.networkInCounter = new client.Counter({
       name: 'server_network_in_bytes',

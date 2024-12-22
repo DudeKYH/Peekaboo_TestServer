@@ -65,7 +65,7 @@ class S2GEventHandler extends BaseEvent {
         }
         sendPacketToClient(packetType, client, payloadBuffer);
       } catch (e) {
-        handleError(e);
+        handleError(e, server);
       }
     }
   }

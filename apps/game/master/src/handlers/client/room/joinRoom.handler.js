@@ -46,7 +46,7 @@ export const joinRoomHandler = async (socket, clientKey, payload, server) => {
       `----------- join Dedicate Request Complete : ${userId} -----------`,
     );
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
 
     const payloadData = {
       globalFailCode: config.globalFailCode.UNKNOWN_ERROR,

@@ -41,6 +41,6 @@ export const exitDedicatedHandler = async (server, payload) => {
       process.exit(1);
     }
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

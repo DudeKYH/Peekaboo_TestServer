@@ -41,6 +41,6 @@ export const createRoomHandler = async (socket, clientKey, payload, server) => {
       );
     }
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

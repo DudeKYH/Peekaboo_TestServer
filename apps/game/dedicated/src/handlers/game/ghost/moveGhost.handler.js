@@ -32,6 +32,6 @@ export const moveGhostRequestHandler = (socket, clientKey, payload, server) => {
       }
     });
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

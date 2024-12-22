@@ -37,6 +37,6 @@ export const itemCreateHandler = (socket, clientKey, payload, server) => {
 
     itemCreateNotification(server.game, itemInfo);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

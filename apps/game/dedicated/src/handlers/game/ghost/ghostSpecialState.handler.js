@@ -27,6 +27,6 @@ export const ghostSpecialStateRequestHandler = (
 
     ghostSpecialStateNotification(server.game, payload);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

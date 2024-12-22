@@ -93,6 +93,6 @@ export const extractorSoulHandler = async (
     // // 영혼 누적 추출량 Notification
     // extractSoulNotification(server.game);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

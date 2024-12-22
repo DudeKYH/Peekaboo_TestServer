@@ -44,6 +44,6 @@ export const registAccountHandler = async (
 
     socket.write(packet);
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

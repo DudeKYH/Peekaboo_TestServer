@@ -51,6 +51,6 @@ export const startStageRequestHandler = async (
 
     await server.game.startStage();
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };

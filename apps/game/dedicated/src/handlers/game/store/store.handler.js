@@ -59,6 +59,6 @@ export const itemPurchaseHandler = (socket, clientKey, payload, server) => {
       itemPurchaseNotification(server.game, itemInfo);
     }
   } catch (e) {
-    handleError(e);
+    handleError(e, server);
   }
 };
