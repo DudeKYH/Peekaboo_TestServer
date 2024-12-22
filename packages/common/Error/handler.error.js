@@ -1,7 +1,7 @@
 import errorCodesMap from '@peekaboo-ssr/error/errorCodesMap';
 import { createPacketS2G } from '@peekaboo-ssr/utils/createPacket';
 
-const handleError = (error) => {
+const handleError = (error, server) => {
   let responseCode;
   let message;
   if (error.code) {
@@ -16,6 +16,13 @@ const handleError = (error) => {
     responseCode = errorCodesMap.SOCKET_ERROR.code;
     message = error.message;
     console.error(`불분명 에러: ${message}`);
+  }
+
+  if (server.serverErrorCounter) {
+    server.serverErrorCounter.inc({
+      type: error.code || 'UnknownError',
+      message: (error.message || 'No error message').substring(0, 50),
+    });
   }
 
   // 패킷타입이 있다면 실패 응답도 수행

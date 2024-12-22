@@ -88,6 +88,10 @@ const errorCodesMap = {
     code: 10021,
     message: '유효하지 않은 요청',
   },
+  TEST_ERROR: {
+    code: 10022,
+    message: '모니터링 에러 테스트',
+  },
 };
 
 export default errorCodesMap;

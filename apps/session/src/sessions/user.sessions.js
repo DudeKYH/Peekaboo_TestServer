@@ -12,15 +12,17 @@ import CustomError from '@peekaboo-ssr/error/CustomError';
 import errorCodesMap from '@peekaboo-ssr/error/errorCodesMap';
 
 // 특정 타입 세션에 참가 처리하는 함수
-export const joinSessionByType = (userSessions, type, userData) => {
-  const key = getUserByUUID(userSessions, userData.uuid);
-
-  // 이미 세션에 있는 유저가 존재
-  if (key) {
-    // 만약 클라이언트키가 다르다면 중복 로그인 처리
-    if (key !== userData.clientKey)
-      throw new CustomError(errorCodesMap.DUPLICATED_USER_CONNECT);
-  }
+export const joinSessionByType = (userSessions, userData) => {
+  // TOROLLBACK : 모니터링을 위한 중복 로그인 코드 주석처리
+  // 로그인할 때 uuid를 받을텐데 이미 로그인한 유저인지 확인
+  // if (userData.uuid) {
+  //   const key = getUserByUUID(userSessions, userData.uuid);
+  //   if (key) {
+  //     // 만약 클라이언트키가 다르다면 중복 로그인 처리
+  //     if (key !== userData.clientKey)
+  //       throw new CustomError(errorCodesMap.DUPLICATED_USER_CONNECT);
+  //   }
+  // }
 
   // 만약 해당 유저의 세션이 없다면 등록해줌.
   if (!userSessions[userData.clientKey]) {

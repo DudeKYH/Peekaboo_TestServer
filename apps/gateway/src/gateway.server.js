@@ -186,6 +186,13 @@ class GatewayServer extends TcpServer {
     });
     register.registerMetric(networkInRateGauge);
 
+    this.serverErrorCounter = new client.Counter({
+      name: 'gateway_server_errors_total',
+      help: 'Total number of errors occurred in the Gateway server',
+      labelNames: ['type', 'message'], // 라벨에 에러 유형 및 요약 메시지 포함
+    });
+    register.registerMetric(this.serverErrorCounter);
+
     this.lastInCount = 0;
     setInterval(() => {
       const currentInCount = this.networkInCounter.hashMap?.['']?.value || 0;

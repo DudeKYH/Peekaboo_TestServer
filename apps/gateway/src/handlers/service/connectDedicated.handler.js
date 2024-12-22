@@ -1,8 +1,11 @@
 import config from '@peekaboo-ssr/config/shared';
+import handleError from '@peekaboo-ssr/error/handleError';
+import CustomError from '@peekaboo-ssr/error/CustomError';
+import errorCodesMap from '@peekaboo-ssr/error/errorCodesMap';
 
 export const connectDedicatedHandler = (server, payload) => {
-  console.log('connectDedicated...');
   try {
+    console.log('connectDedicated...');
     const { dedicateKey, clientKey, userId } = payload;
 
     // 게이트웨이의 데디맵에 유저를 추가함.
@@ -28,7 +31,11 @@ export const connectDedicatedHandler = (server, payload) => {
     };
 
     server.pubSubManager.sendMessage(config.subChannel.session, pubMessage);
+
+    if (true) {
+      throw new CustomError(errorCodesMap.TEST_ERROR);
+    }
   } catch (e) {
-    console.error(e);
+    handleError(e, server);
   }
 };

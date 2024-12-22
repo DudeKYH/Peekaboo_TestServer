@@ -1,25 +1,30 @@
 import config from '@peekaboo-ssr/config/shared';
+import handleError from '@peekaboo-ssr/error/handleError';
 
 export const createDedicatedHandler = (server, payload) => {
-  console.log('createDedicated...');
-  const { hostKey, dedicateKey, distributorKey, gameSessionId } = payload;
+  try {
+    console.log('createDedicated...');
+    const { hostKey, dedicateKey, distributorKey, gameSessionId } = payload;
 
-  // 게이트웨이의 데디맵에 유저를 추가함.
-  server.mapClients.dedicates[dedicateKey].users.push(hostKey);
+    // 게이트웨이의 데디맵에 유저를 추가함.
+    server.mapClients.dedicates[dedicateKey].users.push(hostKey);
 
-  // 게이트웨이의 데디맵에 dedicated의 distributorClientKey 추가함.
-  server.mapClients.dedicates[dedicateKey].distributorKey = distributorKey;
+    // 게이트웨이의 데디맵에 dedicated의 distributorClientKey 추가함.
+    server.mapClients.dedicates[dedicateKey].distributorKey = distributorKey;
 
-  // 현재 연결된 유저맵에 gameSessionKey를 저장 (데디에 참여했는지 빠른 확인을 위함)
-  server.connectClients[hostKey].gameSessionKey = dedicateKey;
-  console.log('@@', server.connectClients[hostKey].gameSessionKey);
+    // 현재 연결된 유저맵에 gameSessionKey를 저장 (데디에 참여했는지 빠른 확인을 위함)
+    server.connectClients[hostKey].gameSessionKey = dedicateKey;
+    console.log('@@', server.connectClients[hostKey].gameSessionKey);
 
-  // 세션 서비스에 등록 요청
-  const pubMessage = {
-    action: config.pubAction.CreateDedicatedRequest,
-    dedicateKey,
-    distributorKey,
-    gameSessionId,
-  };
-  server.pubSubManager.sendMessage(config.subChannel.session, pubMessage);
+    // 세션 서비스에 등록 요청
+    const pubMessage = {
+      action: config.pubAction.CreateDedicatedRequest,
+      dedicateKey,
+      distributorKey,
+      gameSessionId,
+    };
+    server.pubSubManager.sendMessage(config.subChannel.session, pubMessage);
+  } catch (e) {
+    handleError(server, e);
+  }
 };
