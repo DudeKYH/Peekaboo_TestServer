@@ -179,7 +179,7 @@ class GatewayServer extends TcpServer {
     this.lastInCount = 0;
     setInterval(() => {
       const currentInCount = this.networkInCounter.hashMap?.['']?.value || 0;
-      const inRate = (currentInCount - this.lastCount) / 5;
+      const inRate = (currentInCount - this.lastInCount) / 5;
 
       networkInRateGauge.set(inRate >= 0 ? inRate : 0);
       this.lastInCount = currentInCount;
