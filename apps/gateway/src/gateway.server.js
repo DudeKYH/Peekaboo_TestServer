@@ -166,7 +166,7 @@ class GatewayServer extends TcpServer {
     const clientCounterGauge = new client.Gauge({
       name: 'gateway_connected_clients',
       help: 'Number of currently connected clients to the Gateway',
-      collect() {
+      collect: () => {
         clientCounterGauge.set(Object.keys(this.connectClients).length || 0); // 현재 클라이언트 수
       },
     });
