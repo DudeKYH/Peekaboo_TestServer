@@ -177,7 +177,9 @@ class GatewayServer extends TcpServer {
       name: 'gateway_dedicated_count',
       help: 'Number of currently dedicated server',
       collect: () => {
-        DedicatedCounterGauge.set(1); // 현재 클라이언트 수
+        DedicatedCounterGauge.set(
+          Object.keys(this.mapClients.dedicates).length,
+        ); // 현재 클라이언트 수
       },
     });
     register.registerMetric(DedicatedCounterGauge);
