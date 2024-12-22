@@ -91,7 +91,7 @@ export const loginRequestHandler = async (
       }
     }
   } catch (e) {
-    //handlerError(e, server);
-    console.error(e);
+    handleError(e, server);
+    //console.error(e);
   }
 };

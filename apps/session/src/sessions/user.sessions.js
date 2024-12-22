@@ -13,7 +13,6 @@ import errorCodesMap from '@peekaboo-ssr/error/errorCodesMap';
 
 // 특정 타입 세션에 참가 처리하는 함수
 export const joinSessionByType = (userSessions, userData) => {
-  // TOROLLBACK : 모니터링을 위한 중복 로그인 코드 주석처리
   // 로그인할 때 uuid를 받을텐데 이미 로그인한 유저인지 확인
   // if (userData.uuid) {
   //   const key = getUserByUUID(userSessions, userData.uuid);
@@ -27,9 +26,9 @@ export const joinSessionByType = (userSessions, userData) => {
   // 만약 해당 유저의 세션이 없다면 등록해줌.
   if (!userSessions[userData.clientKey]) {
     // 유저 세션에 참여하는 경우 등록
-    if (type === 'user') {
+    if (userData.type === 'user') {
       userSessions[userData.clientKey] = {
-        type,
+        type: userData.type,
         userId: userData.uuid,
       };
     } else {
@@ -40,20 +39,22 @@ export const joinSessionByType = (userSessions, userData) => {
   }
   // 존재한다면 해당 유저의 세션을 옮겨주는 작업
   else {
-    // 만약 게임으로 이동한다면 로비 세션이었는지 확인
-    if (type === 'game') {
-      // if (userSessions[userData.clientKey].type !== 'lobby') {
-      //   console.log('로비>게임 비정상 접속 확인');
-      //   throw new CustomError(errorCodesMap.INVALID_PACKET);
-      // }
+    const session = userSessions[userData.clientKey];
+    if (session) {
+      session.type = userData.type;
     }
-    userSessions[userData.clientKey].type = type;
   }
-  console.log(`${userData.clientKey} 유저가 ${type} 세션에 참여하였습니다.`);
+  console.log(
+    `${userData.clientKey} 유저가 ${userData.type} 세션에 참여하였습니다.`,
+  );
 };
 
-export const getSessionByType = (userSessions, type) => {
-  return userSessions[type];
+export const getSessionByType = (userSessions, clientKey, type) => {
+  const session = userSessions[clientKey][clientKey];
+  if (session && session.type) {
+    return session;
+  }
+  return null;
 };
 
 export const getUserByUUID = (userSessions, uuid) => {
@@ -67,5 +68,5 @@ export const getUserByUUID = (userSessions, uuid) => {
 };
 
 export const getUserByClientKey = (userSessions, clientKey) => {
-  return userSessions.find((user) => user.clientKey === clientKey);
+  return userSessions[clientKey] || null;
 };

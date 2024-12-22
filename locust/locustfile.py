@@ -183,7 +183,7 @@ class GameServerTasks(TaskSet):
 
     def on_start(self):
         """사용자 시작 시 초기 설정"""
-        self.tcp_client = TCPClient("54.180.137.103", 6000)
+        self.tcp_client = TCPClient("3.38.117.135", 6000)
         self.tcp_client.connect()
         self.user_instance = self._get_user()
 
